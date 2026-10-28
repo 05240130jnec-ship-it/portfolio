@@ -1,4 +1,4 @@
-// ---------- Dark / light theme (remembers the visitor's choice) ----------
+// ---------- Dark / light theme ----------
 const root = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');
 const themeIcon = document.getElementById('themeIcon');
@@ -40,7 +40,7 @@ menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => 
   burger.setAttribute('aria-expanded', 'false');
 }));
 
-// ---------- Highlight the section you are reading ----------
+// ---------- Highlight the section ----------
 const sections = document.querySelectorAll('main section');
 const navLinks = menu.querySelectorAll('a');
 const spy = new IntersectionObserver(entries => {
@@ -69,7 +69,7 @@ function type() {
 }
 type();
 
-// ---------- Fade sections in as you scroll ----------
+// ---------- Fade sections scroll ----------
 const revealer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
