@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Chungku Wangmo is a Computer System and Network student at JNEC from Samdrup Jongkhar, Bhutan.">
+<title>Chungku Wangmo | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header id="header">
+  <nav class="wrap nav" aria-label="Main">
+    <a href="#home" class="brand"><span class="brand-mark">CW</span><span>Chungku</span></a>
+    <ul class="menu" id="menu">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="icon-btn burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+<!-- ================= HOME ================= -->
+<section class="hero" id="home">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="pill">👋 Welcome to my portfolio</span>
+      <h1>Hi, I'm<br>Chungku Wangmo</h1>
+      <p class="role">I'm a <span id="typing"></span><span class="caret"></span></p>
+      <p class="hero-sub">A Computer System and Network student at JNEC who loves networks, websites and learning something new every day.</p>
+      <div class="hero-actions">
+        <a href="#certificates" class="btn btn-white">See my certificates</a>
+        <a href="#contact" class="btn btn-ghost">Contact me</a>
+      </div>
+    </div>
+
+    <div class="hero-photo">
+      <div class="ring">
+        <img src="media/profile.jpg" alt="Portrait of Chungku Wangmo">
+      </div>
+      <div class="float-card fc-1"><b>5</b><span>Certificates</span></div>
+      <div class="float-card fc-2"><b>CCNA</b><span>2 courses done</span></div>
+      <div class="float-card fc-3"><b>4</b><span>Languages</span></div>
+    </div>
+  </div>
+
+  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 64c180 40 360 56 540 40s360-72 540-72 270 40 360 56v92H0z"/></svg>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">About me</span>
+      <h2>Get to know me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p>I'm from <strong>Khameythang, Samdrup Jongkhar</strong>. I finished Class XII in Commerce at Desi High School, then followed my curiosity into technology. Today I study <strong>Computer System and Network</strong> at Jigme Namgyel Engineering College, where I learn enterprise networking, security, automation, backend development and web design.</p>
+        <p>Alongside my studies I've completed two CCNA courses through the Cisco Networking Academy, and online courses on Coursera in Linux server administration, Python GUI programming and full-stack web development.</p>
+        <p>Away from the screen I read, play sports, travel, and take photographs along the way.</p>
+        <div class="goal">
+          <span class="goal-icon">🎯</span>
+          <div>
+            <h3>My goal</h3>
+            <p>To become a network professional who builds reliable, secure systems for organisations in Bhutan, and to keep learning with a positive attitude.</p>
+          </div>
+        </div>
+      </div>
+      <div class="info-cards">
+        <div class="info c-violet reveal"><span class="info-icon">🎓</span><div><h3>Studying</h3><p>Computer System and Network, JNEC</p></div></div>
+        <div class="info c-pink reveal"><span class="info-icon">📜</span><div><h3>Courses</h3><p>CCNA, Linux, Python, web development</p></div></div>
+        <div class="info c-orange reveal"><span class="info-icon">📷</span><div><h3>Interests</h3><p>Digital marketing, travel, photography</p></div></div>
+        <div class="info c-teal reveal"><span class="info-icon">💬</span><div><h3>Languages</h3><p>English, Dzongkha, Sharchop, Lhotsham</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="block block-tint" id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">Skills</span>
+      <h2>What I work with</h2>
+    </div>
+    <div class="filters reveal" role="group" aria-label="Filter skills">
+      <button class="filter" data-show="all" aria-pressed="true">All</button>
+      <button class="filter" data-show="network" aria-pressed="false">Networking</button>
+      <button class="filter" data-show="code" aria-pressed="false">Programming</button>
+      <button class="filter" data-show="tools" aria-pressed="false">Tools</button>
+      <button class="filter" data-show="people" aria-pressed="false">People</button>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group c-violet reveal" data-group="network">
+        <div class="sg-head"><span class="sg-icon">🌐</span><h3>Networking</h3></div>
+        <ul class="chips"><li>Routing and switching</li><li>eBGP</li><li>Access control lists</li><li>DHCP</li><li>IP addressing and subnetting</li><li>Network security basics</li></ul>
+      </div>
+      <div class="skill-group c-pink reveal" data-group="code">
+        <div class="sg-head"><span class="sg-icon">💻</span><h3>Programming</h3></div>
+        <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>PHP</li><li>Laravel</li><li>Python</li><li>Tkinter</li><li>MySQL</li></ul>
+      </div>
+      <div class="skill-group c-orange reveal" data-group="tools">
+        <div class="sg-head"><span class="sg-icon">🛠️</span><h3>Tools</h3></div>
+        <ul class="chips"><li>Cisco Packet Tracer</li><li>Linux server administration</li><li>Ubuntu Server</li><li>VirtualBox</li><li>Git and GitHub</li><li>VS Code</li></ul>
+      </div>
+      <div class="skill-group c-teal reveal" data-group="people">
+        <div class="sg-head"><span class="sg-icon">🤝</span><h3>People</h3></div>
+        <ul class="chips"><li>Teamwork</li><li>Communication</li><li>Accounting</li><li>Digital marketing</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section class="block" id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">Education</span>
+      <h2>My learning journey</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="timeline">
+        <div class="stop reveal">
+          <span class="when">2024 – Present</span>
+          <h3>Computer System and Network</h3>
+          <p>Jigme Namgyel Engineering College, Dewathang</p>
+        </div>
+        <div class="stop reveal">
+          <span class="when">2023</span>
+          <h3>Class XII, BHSEC (Commerce)</h3>
+          <p>Desi High School</p>
+          <span class="grade">73.75%</span>
+        </div>
+        <div class="stop reveal">
+          <span class="when">2020</span>
+          <h3>Class X, BCSE</h3>
+          <p>Phuntshothang Middle Secondary School</p>
+          <span class="grade">69%</span>
+        </div>
+      </div>
+
+      <div class="awards">
+        <div class="award-box reveal">
+          <h3>🏆 Academic awards</h3>
+          <ul>
+            <li>3rd place, Class XI annual exam, Karmaling Higher Secondary School</li>
+            <li>3rd place, Class X mid-term exam, Phuntshothang Middle Secondary School</li>
+            <li>2nd position in Class III, Woongchelu Primary School</li>
+          </ul>
+        </div>
+        <div class="award-box reveal">
+          <h3>🎭 Other achievements</h3>
+          <ul>
+            <li>Boedra dance competition participant</li>
+            <li>Zhungdra dance competition participant</li>
+            <li>Certificate of participation in sports</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CERTIFICATES ================= -->
+<section class="block block-tint" id="certificates">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="tag">Certificates</span>
+      <h2>Courses I've completed</h2>
+      <p class="lead">From the Cisco Networking Academy and Coursera. Click a certificate to see it full size.</p>
+    </div>
+    <div class="certs">
+
+      <article class="cert-card cisco reveal">
+        <a class="cert-img" href="media/certificates/ccna1.jpg" target="_blank" rel="noopener">
+          <img src="media/certificates/ccna1.jpg" alt="CCNA: Introduction to Networks certificate" loading="lazy">
+        </a>
+        <div class="cert-info">
+          <span class="issuer">Cisco Networking Academy</span>
+          <h3>CCNA: Introduction to Networks</h3>
+          <p>Offered by Jigme Namgyel Engineering College (Royal University of Bhutan)</p>
+          <div class="cert-foot"><span>📅 27 Jul 2026</span></div>
+        </div>
+      </article>
+
+      <article class="cert-card cisco reveal">
+        <a class="cert-img" href="media/certificates/ccna2.jpg" target="_blank" rel="noopener">
+          <img src="media/certificates/ccna2.jpg" alt="CCNA: Switching, Routing, and Wireless Essentials certificate" loading="lazy">
+        </a>
+        <div class="cert-info">
+          <span class="issuer">Cisco Networking Academy</span>
+          <h3>CCNA: Switching, Routing, and Wireless Essentials</h3>
+          <p>Offered by Jigme Namgyel Engineering College (Royal University of Bhutan)</p>
+          <div class="cert-foot"><span>📅 27 Jul 2026</span></div>
+        </div>
+      </article>
+
+      <article class="cert-card coursera reveal">
+        <a class="cert-img" href="media/certificates/linux.jpg" target="_blank" rel="noopener">
+          <img src="media/certificates/linux.jpg" alt="Becoming a Linux Server Admin certificate" loading="lazy">
+        </a>
+        <div class="cert-info">
+          <span class="issuer">Coursera · Packt</span>
+          <h3>Becoming a Linux Server Admin</h3>
+          <p>Online course authorized by Packt and offered through Coursera</p>
+          <div class="cert-foot"><span>📅 4 Sep 2026</span><a href="https://coursera.org/verify/3H800OEQL116" target="_blank" rel="noopener">Verify</a></div>
+        </div>
+      </article>
+
+      <article class="cert-card coursera reveal">
+        <a class="cert-img" href="media/certificates/web.jpg" target="_blank" rel="noopener">
+          <img src="media/certificates/web.jpg" alt="Master Full-Stack Web Development with Laravel and PHP certificate" loading="lazy">
+        </a>
+        <div class="cert-info">
+          <span class="issuer">Coursera · Board Infinity</span>
+          <h3>Full-Stack Web Development with Laravel &amp; PHP</h3>
+          <p>Online course authorized by Board Infinity and offered through Coursera</p>
+          <div class="cert-foot"><span>📅 4 Sep 2026</span><a href="https://coursera.org/verify/X6Y7747GPQEU" target="_blank" rel="noopener">Verify</a></div>
+        </div>
+      </article>
+
+      <article class="cert-card coursera reveal">
+        <a class="cert-img" href="media/certificates/python.jpg" target="_blank" rel="noopener">
+          <img src="media/certificates/python.jpg" alt="Python Tkinter: Design, Build and Integrate GUIs certificate" loading="lazy">
+        </a>
+        <div class="cert-info">
+          <span class="issuer">Coursera · EDUCBA</span>
+          <h3>Python Tkinter: Design, Build &amp; Integrate GUIs</h3>
+          <p>Online course authorized by EDUCBA and offered through Coursera</p>
+          <div class="cert-foot"><span>📅 14 Sep 2026</span><a href="https://coursera.org/verify/3IYQ7521ARIO" target="_blank" rel="noopener">Verify</a></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <div class="contact-text">
+        <span class="tag tag-light">Contact</span>
+        <h2>Let's work together</h2>
+        <p>Have an opportunity or a question? Send me a message and I'll get back to you. References are available on request.</p>
+        <div class="ways">
+          <a class="way" href="mailto:chungkuwangmo6@gmail.com"><span class="way-icon">✉️</span><span><small>Email</small>chungkuwangmo6@gmail.com</span></a>
+          <a class="way" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener"><span class="way-icon">💻</span><span><small>GitHub</small>github.com/YOUR-USERNAME</span></a>
+          <div class="way"><span class="way-icon">📍</span><span><small>Location</small>Khameythang, Samdrup Jongkhar, Bhutan</span></div>
+        </div>
+      </div>
+
+      <form id="contactForm" novalidate>
+        <div class="field"><label for="name">Your name</label><input id="name" type="text" autocomplete="name" placeholder="Karma Dorji"><span class="err" id="name-err"></span></div>
+        <div class="field"><label for="email">Your email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err" id="email-err"></span></div>
+        <div class="field"><label for="message">Message</label><textarea id="message" rows="5" placeholder="Write your message here"></textarea><span class="err" id="message-err"></span></div>
+        <button type="submit" class="btn btn-grad">Send message</button>
+        <p class="sent" id="sent" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>&copy; <span id="year"></span> Chungku Wangmo</span>
+    <span>Made with HTML, CSS and JavaScript</span>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script src="js/script.js"></script>
+</body>
+</html>
