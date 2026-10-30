@@ -368,3 +368,10 @@ footer { background: #120b24; color: #b7aed0; font-size: .92rem; }
   .certs { grid-template-columns: 1fr; }
   form { padding: 24px; }
 }
+.about-intro {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 20px;
+}

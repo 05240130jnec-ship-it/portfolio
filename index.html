@@ -12,6 +12,21 @@
 </head>
 <body>
 
+<!-- ================= LOADING SCREEN ================= -->
+<div class="loader" id="loader" aria-hidden="true">
+  <svg class="loader-net" viewBox="0 0 200 120">
+    <line x1="30" y1="60" x2="100" y2="25"/><line x1="100" y1="25" x2="170" y2="60"/>
+    <line x1="30" y1="60" x2="100" y2="95"/><line x1="100" y1="95" x2="170" y2="60"/>
+    <line x1="100" y1="25" x2="100" y2="95"/>
+    <circle cx="30" cy="60" r="7"/><circle cx="100" cy="25" r="7"/><circle cx="170" cy="60" r="7"/><circle cx="100" cy="95" r="7"/>
+  </svg>
+  <p class="loader-text">Connecting<span>.</span><span>.</span><span>.</span></p>
+</div>
+
+<!-- scroll progress bar and cursor glow -->
+<div class="progress" id="progress"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
 <!-- ================= HEADER ================= -->
 <header id="header">
   <nav class="wrap nav" aria-label="Main">
@@ -38,6 +53,7 @@
 <main>
 <!-- ================= HOME ================= -->
 <section class="hero" id="home">
+  <canvas class="net-canvas" id="netCanvas" aria-hidden="true"></canvas>
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
@@ -45,12 +61,12 @@
   <div class="wrap hero-grid">
     <div class="hero-text">
       <span class="pill">👋 Welcome to my portfolio</span>
-      <h1>Hi, I'm<br>Chungku Wangmo</h1>
+      <h1 class="split" aria-label="Hi, I'm Chungku Wangmo">Hi, I'm<br>Chungku Wangmo</h1>
       <p class="role">I'm a <span id="typing"></span><span class="caret"></span></p>
       <p class="hero-sub">A Computer System and Network student at JNEC who loves networks, websites and learning something new every day.</p>
       <div class="hero-actions">
-        <a href="#certificates" class="btn btn-white">See my certificates</a>
-        <a href="#contact" class="btn btn-ghost">Contact me</a>
+        <a href="#certificates" class="btn btn-white magnetic">See my certificates</a>
+        <a href="#contact" class="btn btn-ghost magnetic">Contact me</a>
       </div>
     </div>
 
@@ -58,9 +74,9 @@
       <div class="ring">
         <img src="media/profile.jpg" alt="Portrait of Chungku Wangmo">
       </div>
-      <div class="float-card fc-1"><b>5</b><span>Certificates</span></div>
+      <div class="float-card fc-1"><b data-count="5">0</b><span>Certificates</span></div>
       <div class="float-card fc-2"><b>CCNA</b><span>2 courses done</span></div>
-      <div class="float-card fc-3"><b>4</b><span>Languages</span></div>
+      <div class="float-card fc-3"><b data-count="4">0</b><span>Languages</span></div>
     </div>
   </div>
 
@@ -76,9 +92,10 @@
     </div>
     <div class="about-grid">
       <div class="about-body reveal">
-        <p>I'm from <strong>Khameythang, Samdrup Jongkhar</strong>. I finished Class XII in Commerce at Desi High School, then followed my curiosity into technology. Today I study <strong>Computer System and Network</strong> at Jigme Namgyel Engineering College, where I learn enterprise networking, security, automation, backend development and web design.</p>
-        <p>Alongside my studies I've completed two CCNA courses through the Cisco Networking Academy, and online courses on Coursera in Linux server administration, Python GUI programming and full-stack web development.</p>
-        <p>Away from the screen I read, play sports, travel, and take photographs along the way.</p>
+        <p class="about-intro">I'm a networking student who enjoys making systems connect, stay secure and simply work.</p>
+        <p>I'm currently studying <strong>Computer System and Network</strong> at Jigme Namgyel Engineering College (JNEC). My focus is on <strong>routing and switching</strong>, <strong>network security</strong> and <strong>Linux servers</strong>, and I also build websites with HTML, CSS, and JavaScript.</p>
+        <p>I learn best by doing. Alongside my degree, I've completed the <strong>CCNA</strong> courses from Cisco Networking Academy and online courses on <strong>Linux administration</strong>, <strong>Python</strong> and <strong>full-stack web development</strong>.</p>
+        <p>When I'm not studying, you'll find me reading, playing sports, travelling or taking photos.</p>
         <div class="goal">
           <span class="goal-icon">🎯</span>
           <div>
@@ -88,10 +105,10 @@
         </div>
       </div>
       <div class="info-cards">
-        <div class="info c-violet reveal"><span class="info-icon">🎓</span><div><h3>Studying</h3><p>Computer System and Network, JNEC</p></div></div>
-        <div class="info c-pink reveal"><span class="info-icon">📜</span><div><h3>Courses</h3><p>CCNA, Linux, Python, web development</p></div></div>
-        <div class="info c-orange reveal"><span class="info-icon">📷</span><div><h3>Interests</h3><p>Troubleshooting, Network Design and Cybersecurity</p></div></div>
-        <div class="info c-teal reveal"><span class="info-icon">💬</span><div><h3>Languages</h3><p>English, Dzongkha, Sharchop, Lhotsham</p></div></div>
+        <div class="info tilt-soft c-violet reveal"><span class="info-icon">🎓</span><div><h3>Studying</h3><p>Computer System and Network, JNEC</p></div></div>
+        <div class="info tilt-soft c-pink reveal"><span class="info-icon">📜</span><div><h3>Courses</h3><p>CCNA, Linux, Python, web development</p></div></div>
+        <div class="info tilt-soft c-orange reveal"><span class="info-icon">📷</span><div><h3>Interests</h3><p>Troubleshooting, Network Design and Cybersecurity</p></div></div>
+        <div class="info tilt-soft c-teal reveal"><span class="info-icon">💬</span><div><h3>Languages</h3><p>English, Dzongkha, Sharchop, Lhotsham</p></div></div>
       </div>
     </div>
   </div>
@@ -112,19 +129,19 @@
       <button class="filter" data-show="people" aria-pressed="false">People</button>
     </div>
     <div class="skill-groups">
-      <div class="skill-group c-violet reveal" data-group="network">
+      <div class="skill-group tilt c-violet reveal" data-group="network">
         <div class="sg-head"><span class="sg-icon">🌐</span><h3>Networking</h3></div>
-        <ul class="chips"><li>Routing and switching</li><li>eBGP</li><li>Access control lists</li><li>DHCP</li><li>IP addressing and subnetting</li><li>Network security basics</li></ul>
+        <ul class="chips"><li>Routing and switching</li><li>Access control lists</li><li>DHCP</li><li>IP addressing and subnetting</li><li>Network security basics</li></ul>
       </div>
-      <div class="skill-group c-pink reveal" data-group="code">
+      <div class="skill-group tilt c-pink reveal" data-group="code">
         <div class="sg-head"><span class="sg-icon">💻</span><h3>Programming</h3></div>
-        <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>PHP</li><li>Laravel</li><li>Python</li><li>Tkinter</li><li>MySQL</li></ul>
+        <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Python</li><li>Tkinter</li><li>MySQL</li></ul>
       </div>
-      <div class="skill-group c-orange reveal" data-group="tools">
+      <div class="skill-group tilt c-orange reveal" data-group="tools">
         <div class="sg-head"><span class="sg-icon">🛠️</span><h3>Tools</h3></div>
         <ul class="chips"><li>Cisco Packet Tracer</li><li>Linux server administration</li><li>Ubuntu Server</li><li>VirtualBox</li><li>Git and GitHub</li><li>VS Code</li></ul>
       </div>
-      <div class="skill-group c-teal reveal" data-group="people">
+      <div class="skill-group tilt c-teal reveal" data-group="people">
         <div class="sg-head"><span class="sg-icon">🤝</span><h3>People</h3></div>
         <ul class="chips"><li>Teamwork</li><li>Communication</li><li>Accounting</li><li>Digital marketing</li></ul>
       </div>
@@ -192,7 +209,7 @@
     </div>
     <div class="certs">
 
-      <article class="cert-card cisco reveal">
+      <article class="cert-card tilt cisco reveal">
         <a class="cert-img" href="media/certificates/ccna1.jpg" target="_blank" rel="noopener">
           <img src="media/certificates/ccna1.jpg" alt="CCNA: Introduction to Networks certificate" loading="lazy">
         </a>
@@ -204,7 +221,7 @@
         </div>
       </article>
 
-      <article class="cert-card cisco reveal">
+      <article class="cert-card tilt cisco reveal">
         <a class="cert-img" href="media/certificates/ccna2.jpg" target="_blank" rel="noopener">
           <img src="media/certificates/ccna2.jpg" alt="CCNA: Switching, Routing, and Wireless Essentials certificate" loading="lazy">
         </a>
@@ -216,7 +233,7 @@
         </div>
       </article>
 
-      <article class="cert-card coursera reveal">
+      <article class="cert-card tilt coursera reveal">
         <a class="cert-img" href="media/certificates/linux.jpg" target="_blank" rel="noopener">
           <img src="media/certificates/linux.jpg" alt="Becoming a Linux Server Admin certificate" loading="lazy">
         </a>
@@ -228,7 +245,7 @@
         </div>
       </article>
 
-      <article class="cert-card coursera reveal">
+      <article class="cert-card tilt coursera reveal">
         <a class="cert-img" href="media/certificates/web.jpg" target="_blank" rel="noopener">
           <img src="media/certificates/web.jpg" alt="Master Full-Stack Web Development with Laravel and PHP certificate" loading="lazy">
         </a>
@@ -240,7 +257,7 @@
         </div>
       </article>
 
-      <article class="cert-card coursera reveal">
+      <article class="cert-card tilt coursera reveal">
         <a class="cert-img" href="media/certificates/python.jpg" target="_blank" rel="noopener">
           <img src="media/certificates/python.jpg" alt="Python Tkinter: Design, Build and Integrate GUIs certificate" loading="lazy">
         </a>
@@ -266,16 +283,16 @@
         <p>Have an opportunity or a question? Send me a message and I'll get back to you. References are available on request.</p>
         <div class="ways">
           <a class="way" href="mailto:chungkuwangmo6@gmail.com"><span class="way-icon">✉️</span><span><small>Email</small>chungkuwangmo6@gmail.com</span></a>
-          <a class="way" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener"><span class="way-icon">💻</span><span><small>GitHub</small>github.com/05240130jnec-ship-it</span></a>
+          <a class="way" href="https://github.com/05240130jnec-ship-it" target="_blank" rel="noopener"><span class="way-icon">💻</span><span><small>GitHub</small>github.com/05240130jnec-ship-it</span></a>
           <div class="way"><span class="way-icon">📍</span><span><small>Location</small>Khameythang, Samdrup Jongkhar, Bhutan</span></div>
         </div>
       </div>
 
-      <form id="contactForm" novalidate>
-        <div class="field"><label for="name">Your name</label><input id="name" type="text" autocomplete="name" placeholder="Karma Dorji"><span class="err" id="name-err"></span></div>
-        <div class="field"><label for="email">Your email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err" id="email-err"></span></div>
-        <div class="field"><label for="message">Message</label><textarea id="message" rows="5" placeholder="Write your message here"></textarea><span class="err" id="message-err"></span></div>
-        <button type="submit" class="btn btn-grad">Send message</button>
+        <form id="contactForm" novalidate>
+        <div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Samdrup"><span class="err" id="name-err"></span></div>
+        <div class="field"><label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="samdrup@email.com" ><span class="err" id="email-err"></span></div>
+        <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="5" placeholder="Write your message here"></textarea><span class="err" id="message-err"></span></div>
+        <button type="submit" class="btn btn-grad" id="sendBtn">Send message</button>
         <p class="sent" id="sent" role="status"></p>
       </form>
     </div>

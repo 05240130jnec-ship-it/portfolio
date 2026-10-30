@@ -90,14 +90,19 @@ filters.forEach(btn => btn.addEventListener('click', () => {
   });
 }));
 
-// ---------- Contact form checks ----------
+// ---------- Contact form: check the fields, then send the message to my email ----------
+// Messages are delivered by FormSubmit (formsubmit.co), a free service for static sites.
+const MY_EMAIL = 'chungkuwangmo6@gmail.com';
 const form = document.getElementById('contactForm');
+const sendBtn = document.getElementById('sendBtn');
+const sent = document.getElementById('sent');
 const rules = {
   name: v => v.trim().length >= 2 || 'Enter your name.',
   email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Enter an email address like name@example.com.',
   message: v => v.trim().length >= 10 || 'Write a message of at least 10 characters.'
 };
-form.addEventListener('submit', e => {
+
+form.addEventListener('submit', async e => {
   e.preventDefault();
   let allGood = true;
   for (const id in rules) {
@@ -109,14 +114,194 @@ form.addEventListener('submit', e => {
     input.setAttribute('aria-invalid', !ok);
     if (!ok) allGood = false;
   }
-  const sent = document.getElementById('sent');
-  if (allGood) {
-    sent.textContent = 'Message sent. Thank you, ' + document.getElementById('name').value.trim() + '!';
+  if (!allGood) { sent.textContent = ''; return; }
+
+  const name = document.getElementById('name').value.trim();
+  sendBtn.disabled = true;
+  sendBtn.textContent = 'Sending...';
+  sent.style.color = '';
+  sent.textContent = '';
+
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/' + MY_EMAIL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        email: document.getElementById('email').value.trim(),
+        message: document.getElementById('message').value.trim(),
+        _subject: 'New message from your portfolio',
+        _template: 'table'
+      })
+    });
+    const data = await response.json();
+    if (!response.ok || data.success === 'false' || data.success === false) throw new Error(data.message);
+    sent.textContent = 'Message sent. Thank you, ' + name + '!';
     form.reset();
-  } else {
-    sent.textContent = '';
+  } catch (err) {
+    sent.style.color = '#e11d48';
+    sent.textContent = 'Your message could not be sent. Please email me directly at ' + MY_EMAIL + '.';
+  } finally {
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send message';
   }
 });
 
 // ---------- Current year in the footer ----------
 document.getElementById('year').textContent = new Date().getFullYear();
+/* =========================================================
+   CREATIVE ANIMATIONS
+   ========================================================= */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- Hide the loading screen once the page is ready ----------
+const loader = document.getElementById('loader');
+window.addEventListener('load', () => setTimeout(() => loader.classList.add('done'), reduceMotion ? 0 : 1200));
+setTimeout(() => loader.classList.add('done'), 4000); // safety: never block the page
+
+// ---------- Split the name into letters so each one animates in ----------
+document.querySelectorAll('.split').forEach(el => {
+  let delay = 0.3;
+  const parts = el.innerHTML.split(/<br\s*\/?>/i);
+  el.innerHTML = parts.map(part =>
+    part.trim().split(' ').map(word =>
+      '<span class="word" aria-hidden="true">' + [...word].map(ch => {
+        const span = `<span class="char" style="animation-delay:${delay.toFixed(2)}s">${ch}</span>`;
+        delay += 0.04;
+        return span;
+      }).join('') + '</span>'
+    ).join(' ')
+  ).join('<br>');
+});
+
+// ---------- Scroll progress bar + timeline line drawing ----------
+const progress = document.getElementById('progress');
+const timeline = document.querySelector('.timeline');
+function onScrollAnim() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+  if (timeline) {
+    const r = timeline.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (window.innerHeight * 0.75 - r.top) / r.height));
+    timeline.style.setProperty('--line-progress', p);
+  }
+}
+window.addEventListener('scroll', onScrollAnim, { passive: true });
+onScrollAnim();
+
+// ---------- Skill chips pop in one by one (stagger) ----------
+document.querySelectorAll('.skill-group .chips').forEach(list => {
+  [...list.children].forEach((li, i) => li.style.transitionDelay = (0.2 + i * 0.07) + 's');
+});
+
+// ---------- Count up the numbers on the floating cards ----------
+document.querySelectorAll('[data-count]').forEach(el => {
+  const target = +el.dataset.count;
+  let n = 0;
+  setTimeout(function step() {
+    el.textContent = ++n;
+    if (n < target) setTimeout(step, 180);
+  }, reduceMotion ? 0 : 2600);
+});
+
+// ---------- Mouse effects (only on computers, not phones) ----------
+const hasMouse = window.matchMedia('(hover: hover)').matches && !reduceMotion;
+if (hasMouse) {
+  document.body.classList.add('has-mouse');
+
+  // soft glow follows the mouse
+  const glow = document.getElementById('cursorGlow');
+  window.addEventListener('mousemove', e => {
+    glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  });
+
+  // 3D tilt on skill and certificate cards
+  document.querySelectorAll('.tilt').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      card.style.transform = `perspective(800px) rotateX(${(0.5 - y) * 10}deg) rotateY(${(x - 0.5) * 10}deg) translateY(-6px)`;
+      card.style.setProperty('--mx', x * 100 + '%');
+      card.style.setProperty('--my', y * 100 + '%');
+    });
+    card.addEventListener('mouseleave', () => card.style.transform = '');
+  });
+
+  // buttons gently follow the mouse (magnetic effect)
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+      btn.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
+    });
+    btn.addEventListener('mouseleave', () => btn.style.transform = '');
+  });
+}
+
+// ---------- Live network animation in the home section ----------
+// Dots (devices) drift around; lines (connections) appear when they are close,
+// and the mouse acts like a router that connects to nearby devices.
+const canvas = document.getElementById('netCanvas');
+if (canvas && !reduceMotion) {
+  const ctx = canvas.getContext('2d');
+  const hero = canvas.parentElement;
+  let nodes = [], w, h, mouse = { x: -999, y: -999 };
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    w = hero.offsetWidth; h = hero.offsetHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.min(80, Math.floor(w * h / 16000));
+    nodes = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+      r: Math.random() * 2 + 1.5
+    }));
+  }
+
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  });
+  hero.addEventListener('mouseleave', () => { mouse.x = mouse.y = -999; });
+
+  let running = true;
+  new IntersectionObserver(([entry]) => {
+    running = entry.isIntersecting;
+    if (running) requestAnimationFrame(draw);
+  }).observe(hero);
+
+  function draw() {
+    if (!running) return;
+    ctx.clearRect(0, 0, w, h);
+    const linkDist = 130;
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      a.x += a.vx; a.y += a.vy;
+      if (a.x < 0 || a.x > w) a.vx *= -1;
+      if (a.y < 0 || a.y > h) a.vy *= -1;
+
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < linkDist) {
+          ctx.strokeStyle = `rgba(255,255,255,${0.22 * (1 - d / linkDist)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+      const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y);
+      if (dm < 180) {
+        ctx.strokeStyle = `rgba(253,230,138,${0.6 * (1 - dm / 180)})`;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+      }
+      ctx.fillStyle = dm < 180 ? 'rgba(253,230,138,.95)' : 'rgba(255,255,255,.7)';
+      ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+}
