@@ -543,3 +543,208 @@ main, footer { position: relative; z-index: 1; }
 
 /* keep the slanted band from making the page scroll sideways */
 html, body { overflow-x: clip; }
+
+/* =========================================================
+   HOME SECTION FOLLOWS LIGHT / DARK MODE
+   ========================================================= */
+:root {
+  --hero-bg: linear-gradient(160deg, #e6f4f2 0%, #f6fbfa 45%, #fdf3df 100%);
+  --hero-ink: #0f2226;
+  --hero-text: #3d5257;
+  --hero-accent: #b45309;
+  --hero-glass: rgba(255, 255, 255, .82);
+  --hero-glass-border: rgba(15, 118, 110, .2);
+  --net-line: 15, 118, 110;
+  --net-hot: 217, 119, 6;
+  --blob-opacity: .16;
+}
+[data-theme="dark"] {
+  --hero-bg: linear-gradient(135deg, #03141a 0%, #062b33 45%, #0a3c41 75%, #10352f 100%);
+  --hero-ink: #ffffff;
+  --hero-text: rgba(255, 255, 255, .86);
+  --hero-accent: #fbbf24;
+  --hero-glass: rgba(255, 255, 255, .1);
+  --hero-glass-border: rgba(255, 255, 255, .22);
+  --net-line: 94, 234, 212;
+  --net-hot: 251, 191, 36;
+  --blob-opacity: .5;
+}
+.hero { background: var(--hero-bg); color: var(--hero-ink); transition: background .4s, color .4s; }
+.hero h1 { color: var(--hero-ink); }
+.hero-sub { color: var(--hero-text); }
+#typing { color: var(--hero-accent); }
+.caret { background: var(--hero-accent); }
+.blob { opacity: var(--blob-opacity); }
+.blob-3 { opacity: calc(var(--blob-opacity) * .7); }
+.btn-ghost { color: var(--hero-ink); border-color: color-mix(in srgb, var(--hero-ink) 55%, transparent); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--hero-ink) 10%, transparent); }
+[data-theme="light"] .btn-white { background: var(--grad); color: #fff; }
+.scroll-hint { border-color: color-mix(in srgb, var(--hero-ink) 55%, transparent); }
+
+/* header text over the home section */
+header:not(.scrolled) .brand { color: var(--hero-ink); }
+[data-theme="light"] header:not(.scrolled) .brand-mark { background: var(--grad); color: #fff; }
+header:not(.scrolled) .menu a { color: var(--hero-text); }
+header:not(.scrolled) .menu a:hover { background: color-mix(in srgb, var(--hero-ink) 10%, transparent); color: var(--hero-ink); }
+[data-theme="light"] header:not(.scrolled) .menu a.active { background: var(--hero-ink); color: #fff; }
+header:not(.scrolled) .icon-btn { color: var(--hero-ink); border-color: var(--hero-glass-border); background: var(--hero-glass); }
+
+/* =========================================================
+   TERMINAL WELCOME LINE
+   ========================================================= */
+.pill.term {
+  font-family: 'Consolas', 'Courier New', monospace; font-size: .9rem; letter-spacing: .01em;
+  background: var(--hero-glass); border-color: var(--hero-glass-border); color: var(--hero-text);
+}
+.pill.term b { color: rgb(var(--net-line)); font-weight: 700; }
+.pill.term i { color: var(--hero-accent); font-style: normal; }
+.term-caret {
+  display: inline-block; width: 8px; height: 1em; margin-left: 4px; vertical-align: -2px;
+  background: rgb(var(--net-line)); animation: blink 1s steps(1) infinite;
+}
+
+/* =========================================================
+   MY NETWORK: photo is the core router, skills are connected devices
+   ========================================================= */
+.hero-photo { position: relative; width: min(100%, 400px); aspect-ratio: 1; margin: 40px auto; }
+.topo { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 0; }
+.topo-lines line {
+  stroke: rgba(var(--net-line), .6); stroke-width: .45; stroke-dasharray: 1.6 1.6; stroke-linecap: round;
+  animation: flow 1.4s linear infinite;
+}
+@keyframes flow { to { stroke-dashoffset: -6.4; } }
+.topo-packets circle { fill: rgb(var(--net-hot)); filter: drop-shadow(0 0 1.2px rgb(var(--net-hot))); }
+
+.hero-photo .ring { inset: 18%; z-index: 1; }
+.core-label {
+  position: absolute; left: 50%; top: 84%; z-index: 2; translate: -50% 0;
+  font-family: 'Consolas', 'Courier New', monospace; font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+  padding: 2px 10px; border-radius: 6px; color: #fff; background: var(--grad); white-space: nowrap;
+}
+
+.node {
+  position: absolute; z-index: 2; translate: -50% -50%;
+  display: flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: 999px;
+  background: var(--hero-glass); border: 1px solid var(--hero-glass-border); backdrop-filter: blur(8px);
+  color: var(--hero-ink); font-weight: 600; font-size: .86rem; white-space: nowrap;
+  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, .45);
+  opacity: 0; animation: nodeIn .6s cubic-bezier(.2, .9, .3, 1.4) calc(1.4s + var(--d)) forwards,
+                         bob 4s ease-in-out calc(2.2s + var(--d)) infinite;
+  transition: box-shadow .25s, border-color .25s;
+}
+.node:hover { border-color: rgb(var(--net-hot)); box-shadow: 0 0 0 4px rgba(var(--net-hot), .2), 0 10px 24px -14px rgba(0,0,0,.45); }
+.node-icon {
+  width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 1rem;
+  background: rgba(var(--net-line), .16);
+}
+.node b { font-weight: 800; }
+@keyframes nodeIn { from { opacity: 0; scale: .4; } to { opacity: 1; scale: 1; } }
+
+@media (max-width: 860px) {
+  .hero-photo { width: min(62%, 250px); margin: 34px auto 30px; }
+  .node { font-size: .7rem; padding: 4px 10px 4px 4px; gap: 5px; }
+  .node-icon { width: 22px; height: 22px; font-size: .75rem; }
+  .core-label { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .node { opacity: 1; animation: none; }
+  .topo-lines line { animation: none; }
+  .topo-packets { display: none; }
+}
+[data-theme="dark"] header:not(.scrolled) .menu a.active { background: #fff; color: var(--violet); }
+
+/* =========================================================
+   v5: EYE-CATCHING HERO, AQUARIUS THEME, FANCIER CARDS
+   ========================================================= */
+:root {
+  --name-a: #0f766e; --name-b: #0891b2; --name-c: #d97706;
+  --star: #0f766e; --star-glow: rgba(15,118,110,.5);
+}
+[data-theme="dark"] {
+  --name-a: #5eead4; --name-b: #38bdf8; --name-c: #fbbf24;
+  --star: #ffffff; --star-glow: rgba(255,255,255,.9);
+}
+
+/* ---------- Name with a flowing gradient ---------- */
+.split .word.grad.done {
+  color: transparent;
+  background: linear-gradient(90deg, var(--name-a), var(--name-b), var(--name-c), var(--name-a));
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  animation: nameFlow 8s linear infinite;
+}
+[data-theme="dark"] .split .word.grad.done { filter: drop-shadow(0 0 22px rgba(56, 189, 248, .35)); }
+@keyframes nameFlow { to { background-position: 300% 0; } }
+.hero h1 { font-size: clamp(2.8rem, 7vw, 5.2rem); letter-spacing: -.02em; }
+
+/* ---------- Aquarius constellation ---------- */
+.aquarius { position: absolute; top: 96px; left: 33%; width: 270px; z-index: 0; pointer-events: none; }
+.aquarius svg { width: 100%; overflow: visible; }
+.aq-lines line {
+  stroke: rgba(var(--net-line), .45); stroke-width: 1.2; stroke-linecap: round;
+  stroke-dasharray: 80; stroke-dashoffset: 80;
+  animation: draw 1s ease forwards; animation-delay: calc(1.6s + var(--i) * .15s);
+}
+.aq-stars circle {
+  fill: var(--star); filter: drop-shadow(0 0 4px var(--star-glow));
+  transform-box: fill-box; transform-origin: center;
+  animation: twinkle 2.6s ease-in-out infinite; animation-delay: var(--t);
+}
+@keyframes twinkle { 0%, 100% { opacity: 1; scale: 1; } 50% { opacity: .35; scale: .7; } }
+.aq-label {
+  display: block; text-align: right; margin-top: 4px; font-family: 'Consolas', 'Courier New', monospace;
+  font-size: .78rem; letter-spacing: .12em; color: var(--hero-text); opacity: 0; animation: fadeUp .8s ease 3.2s forwards;
+}
+
+/* ---------- Flowing water waves at the bottom of the home section ---------- */
+.wave { display: none; }
+.waves { position: absolute; left: 0; right: 0; bottom: -1px; height: 120px; z-index: 1; overflow: hidden; pointer-events: none; }
+.wave-layer { position: absolute; bottom: 0; left: 0; width: 200%; height: 100%; }
+.wave-layer path { fill: var(--page); transition: fill .3s; }
+.w1 { opacity: .25; animation: waveMove 22s linear infinite; }
+.w2 { opacity: .5; animation: waveMove 15s linear infinite reverse; }
+.w3 { opacity: 1; animation: waveMove 10s linear infinite; }
+@keyframes waveMove { to { transform: translateX(-50%); } }
+
+/* ---------- Glass cards with a glowing animated border on hover ---------- */
+@property --ang { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+.info, .award-box { position: relative; }
+.skill-group, .cert-card, .info, .award-box, .stop {
+  background: color-mix(in srgb, var(--card) 82%, transparent);
+  backdrop-filter: blur(10px);
+}
+.skill-group::before, .cert-card::before, .info::before, .award-box::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 2px; z-index: 3; pointer-events: none;
+  background: conic-gradient(from var(--ang), transparent 0 55%, #22d3ee 70%, #fbbf24 85%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; transition: opacity .35s; animation: spinBorder 3.5s linear infinite;
+}
+.skill-group:hover::before, .cert-card:hover::before, .info:hover::before, .award-box:hover::before { opacity: 1; }
+@keyframes spinBorder { to { --ang: 360deg; } }
+.info:hover, .award-box:hover { box-shadow: 0 22px 44px -22px rgba(8,145,178,.55); }
+
+/* ---------- Cursor ring (computers only) ---------- */
+.cursor-ring {
+  position: fixed; top: 0; left: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px; z-index: 100;
+  border: 2px solid rgba(var(--net-line), .7); border-radius: 50%; pointer-events: none;
+  opacity: 0; transition: width .25s, height .25s, margin .25s, background .25s, border-color .25s, opacity .3s;
+}
+body.has-mouse .cursor-ring { opacity: 1; }
+.cursor-ring.big {
+  width: 58px; height: 58px; margin: -29px 0 0 -29px;
+  background: rgba(var(--net-hot), .12); border-color: rgb(var(--net-hot));
+}
+
+@media (max-width: 860px) {
+  .aquarius { top: 74px; left: auto; right: 4%; width: 150px; opacity: .7; }
+  .aq-label { font-size: .65rem; }
+  .waves { height: 80px; }
+}
+@media (hover: none) { .cursor-ring { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .split .word.grad.done, .wave-layer, .aq-stars circle { animation: none; }
+  .aq-lines line { stroke-dashoffset: 0; animation: none; }
+  .aq-label { opacity: 1; }
+  .cursor-ring { display: none; }
+}
