@@ -156,8 +156,16 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 // ---------- Hide the loading screen once the page is ready ----------
 const loader = document.getElementById('loader');
-window.addEventListener('load', () => setTimeout(() => loader.classList.add('done'), reduceMotion ? 0 : 1200));
-setTimeout(() => loader.classList.add('done'), 4000); // safety: never block the page
+function hideLoader() {
+  if (!loader || loader.dataset.hidden) return;
+  loader.dataset.hidden = '1';
+  loader.classList.add('done');
+  loader.style.opacity = '0';
+  loader.style.transition = 'opacity .6s ease';
+  setTimeout(() => loader.remove(), 700);
+}
+window.addEventListener('load', () => setTimeout(hideLoader, reduceMotion ? 0 : 1200));
+setTimeout(hideLoader, 4000); // safety: never block the page
 
 // ---------- Split the name into letters so each one animates in ----------
 document.querySelectorAll('.split').forEach(el => {
@@ -245,7 +253,7 @@ const canvas = document.getElementById('netCanvas');
 if (canvas && !reduceMotion) {
   const ctx = canvas.getContext('2d');
   const hero = canvas.parentElement;
-  let nodes = [], w, h, mouse = { x: -999, y: -999 };
+  let nodes = [], packets = [], w, h, mouse = { x: -999, y: -999 };
 
   function resize() {
     const dpr = window.devicePixelRatio || 1;
@@ -276,6 +284,7 @@ if (canvas && !reduceMotion) {
     if (!running) return;
     ctx.clearRect(0, 0, w, h);
     const linkDist = 130;
+    const links = [];
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
       a.x += a.vx; a.y += a.vy;
@@ -285,20 +294,40 @@ if (canvas && !reduceMotion) {
       for (let j = i + 1; j < nodes.length; j++) {
         const b = nodes[j], d = Math.hypot(a.x - b.x, a.y - b.y);
         if (d < linkDist) {
-          ctx.strokeStyle = `rgba(255,255,255,${0.22 * (1 - d / linkDist)})`;
+          links.push([i, j]);
+          ctx.strokeStyle = `rgba(94,234,212,${0.28 * (1 - d / linkDist)})`;
           ctx.lineWidth = 1;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
       }
       const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y);
       if (dm < 180) {
-        ctx.strokeStyle = `rgba(253,230,138,${0.6 * (1 - dm / 180)})`;
+        ctx.strokeStyle = `rgba(251,191,36,${0.6 * (1 - dm / 180)})`;
         ctx.lineWidth = 1.2;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
       }
-      ctx.fillStyle = dm < 180 ? 'rgba(253,230,138,.95)' : 'rgba(255,255,255,.7)';
+      ctx.fillStyle = dm < 180 ? 'rgba(251,191,36,.95)' : 'rgba(204,251,241,.75)';
       ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); ctx.fill();
     }
+
+    // data packets: small glowing dots that travel along the connections
+    if (links.length && packets.length < 16 && Math.random() < 0.12) {
+      const [from, to] = links[Math.floor(Math.random() * links.length)];
+      packets.push(Math.random() < 0.5 ? { from, to, t: 0 } : { from: to, to: from, t: 0 });
+    }
+    packets = packets.filter(pk => {
+      const a = nodes[pk.from], b = nodes[pk.to];
+      if (!a || !b || Math.hypot(a.x - b.x, a.y - b.y) > linkDist) return false;
+      pk.t += 0.02;
+      if (pk.t >= 1) return false;
+      const x = a.x + (b.x - a.x) * pk.t, y = a.y + (b.y - a.y) * pk.t;
+      ctx.save();
+      ctx.shadowColor = 'rgba(251,191,36,.9)'; ctx.shadowBlur = 10;
+      ctx.fillStyle = '#fcd34d';
+      ctx.beginPath(); ctx.arc(x, y, 2.6, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+      return true;
+    });
     requestAnimationFrame(draw);
   }
 

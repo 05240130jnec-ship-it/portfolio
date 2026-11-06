@@ -8,13 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 
 <!-- ================= LOADING SCREEN ================= -->
-<div class="loader" id="loader" aria-hidden="true">
-  <svg class="loader-net" viewBox="0 0 200 120">
+<div class="loader" id="loader" aria-hidden="true" style="position:fixed;inset:0;z-index:999;background:#03141a;display:grid;place-content:center;justify-items:center;">
+  <svg class="loader-net" viewBox="0 0 200 120" width="180" height="108">
     <line x1="30" y1="60" x2="100" y2="25"/><line x1="100" y1="25" x2="170" y2="60"/>
     <line x1="30" y1="60" x2="100" y2="95"/><line x1="100" y1="95" x2="170" y2="60"/>
     <line x1="100" y1="25" x2="100" y2="95"/>
@@ -24,8 +24,8 @@
 </div>
 
 <!-- scroll progress bar and cursor glow -->
-<div class="progress" id="progress"></div>
-<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<div class="progress" id="progress" style="position:fixed;top:0;left:0;height:4px;width:100%;transform:scaleX(0);"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true" style="position:fixed;top:0;left:0;pointer-events:none;"></div>
 
 <!-- ================= HEADER ================= -->
 <header id="header">
@@ -53,7 +53,7 @@
 <main>
 <!-- ================= HOME ================= -->
 <section class="hero" id="home">
-  <canvas class="net-canvas" id="netCanvas" aria-hidden="true"></canvas>
+  <canvas class="net-canvas" id="netCanvas" aria-hidden="true" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
@@ -80,8 +80,15 @@
     </div>
   </div>
 
+  <a href="#about" class="scroll-hint" aria-label="Scroll to About section"><span></span></a>
+
   <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 64c180 40 360 56 540 40s360-72 540-72 270 40 360 56v92H0z"/></svg>
 </section>
+
+<!-- ================= MOVING SKILLS BAND =================
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track"><span>Routing &amp; Switching</span><i>✦</i><span>CCNA</span><i>✦</i><span>Linux Server Admin</span><i>✦</i><span>Network Security</span><i>✦</i><span>DHCP</span><i>✦</i><span>Subnetting</span><i>✦</i><span>Python</span><i>✦</i><span>HTML &amp; CSS</span><i>✦</i><span>JavaScript</span><i>✦</i><span>Cisco Packet Tracer</span><i>✦</i><span>Ubuntu Server</span><i>✦</i><span>Git &amp; GitHub</span><i>✦</i><span>Routing &amp; Switching</span><i>✦</i><span>CCNA</span><i>✦</i><span>Linux Server Admin</span><i>✦</i><span>Network Security</span><i>✦</i><span>DHCP</span><i>✦</i><span>Subnetting</span><i>✦</i><span>Python</span><i>✦</i><span>HTML &amp; CSS</span><i>✦</i><span>JavaScript</span><i>✦</i><span>Cisco Packet Tracer</span><i>✦</i><span>Ubuntu Server</span><i>✦</i><span>Git &amp; GitHub</span><i>✦</i></div>
+</div> -->
 
 <!-- ================= ABOUT ================= -->
 <section class="block" id="about">
@@ -307,6 +314,6 @@
 </footer>
 
 <button id="toTop" aria-label="Back to top">↑</button>
-<script src="js/script.js"></script>
+<script src="js/script.js?v=3"></script>
 </body>
 </html>
