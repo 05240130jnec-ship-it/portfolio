@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=12">
+<link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body>
 
@@ -36,6 +36,7 @@
       <li><a href="#home" class="active">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#certificates">Certificates</a></li>
       <li><a href="#terminal">Terminal</a></li>
@@ -205,6 +206,95 @@
         <div class="sg-head"><span class="sg-icon">🤝</span><h3>People</h3></div>
         <ul class="chips"><li>Teamwork</li><li>Communication</li><li>Accounting</li><li>Digital marketing</li></ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="bg-word" aria-hidden="true">PROJECTS</span>
+      <span class="tag">Projects</span>
+      <h2>Things I'm building</h2>
+      <p class="lead">Hands-on work from my networking and web development courses at JNEC.</p>
+    </div>
+    <div class="projects">
+
+      <article class="project tilt reveal">
+        <div class="project-art art-net">
+          <svg viewBox="0 0 320 150" aria-hidden="true">
+            <g class="pa-lines"><line x1="160" y1="75" x2="60" y2="35"/><line x1="160" y1="75" x2="60" y2="115"/><line x1="160" y1="75" x2="260" y2="35"/><line x1="160" y1="75" x2="260" y2="115"/><line x1="160" y1="75" x2="160" y2="18"/><line x1="160" y1="75" x2="160" y2="132"/></g>
+            <g class="pa-nodes">
+              <rect x="134" y="55" width="52" height="40" rx="8" class="pa-core"/><text x="160" y="80" class="pa-core-t">router</text>
+              <rect x="24" y="22" width="72" height="26" rx="6"/><text x="60" y="39">DNS</text>
+              <rect x="24" y="102" width="72" height="26" rx="6"/><text x="60" y="119">DHCP</text>
+              <rect x="224" y="22" width="72" height="26" rx="6"/><text x="260" y="39">Web</text>
+              <rect x="224" y="102" width="72" height="26" rx="6"/><text x="260" y="119">FTP</text>
+              <rect x="126" y="4" width="68" height="22" rx="6"/><text x="160" y="19">SSH</text>
+              <rect x="126" y="124" width="68" height="22" rx="6"/><text x="160" y="139">Syslog</text>
+            </g>
+            <circle r="4" class="pa-packet"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160 75 L60 35"/></circle>
+            <circle r="4" class="pa-packet"><animateMotion dur="2.2s" begin=".7s" repeatCount="indefinite" path="M260 115 L160 75"/></circle>
+            <circle r="4" class="pa-packet"><animateMotion dur="2.2s" begin="1.4s" repeatCount="indefinite" path="M160 75 L260 35"/></circle>
+          </svg>
+          <span class="status status-wip">● In progress</span>
+        </div>
+        <div class="project-body">
+          <span class="project-type">Individual mini project · Networking</span>
+          <h3>Linux Network Services Lab</h3>
+          <p>A virtual network lab where I configure and connect core Linux services (DNS, DHCP, FTP, a web server, SSH and centralised syslog) on Ubuntu Server machines, then test that they work together end to end.</p>
+          <ul class="tech"><li>Ubuntu Server</li><li>GNS3</li><li>VirtualBox</li><li>DNS</li><li>DHCP</li><li>FTP</li><li>SSH</li><li>Syslog</li></ul>
+        </div>
+      </article>
+
+      <article class="project tilt reveal">
+        <div class="project-art art-port">
+          <svg viewBox="0 0 320 150" aria-hidden="true">
+            <rect x="40" y="14" width="240" height="124" rx="12" class="pa-window"/>
+            <rect x="40" y="14" width="240" height="22" rx="12" class="pa-bar"/>
+            <circle cx="56" cy="25" r="4" fill="#ff5f56"/><circle cx="70" cy="25" r="4" fill="#ffbd2e"/><circle cx="84" cy="25" r="4" fill="#27c93f"/>
+            <circle cx="215" cy="85" r="30" class="pa-ring"/><circle cx="215" cy="85" r="23" class="pa-face"/>
+            <rect x="60" y="56" width="100" height="12" rx="6" class="pa-line1"/>
+            <rect x="60" y="76" width="80" height="12" rx="6" class="pa-line2"/>
+            <rect x="60" y="100" width="56" height="16" rx="8" class="pa-btn"/>
+            <rect x="122" y="100" width="40" height="16" rx="8" class="pa-btn2"/>
+          </svg>
+          <span class="status status-live">● Live</span>
+        </div>
+        <div class="project-body">
+          <span class="project-type">Personal project · Web design</span>
+          <h3>Personal Portfolio Website</h3>
+          <p>The site you're looking at right now: a responsive portfolio with light and dark themes, an interactive Linux terminal, a 3D certificate carousel, a live network animation and WhatsApp contact.</p>
+          <ul class="tech"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Vercel</li></ul>
+          <div class="project-links">
+            <a href="https://github.com/05250179jnec-arch/Personal-Portfolio" target="_blank" rel="noopener" class="p-link">View code on GitHub</a>
+            <span class="p-here">✦ You're on it</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="project tilt reveal">
+        <div class="project-art art-auto">
+          <svg viewBox="0 0 320 150" aria-hidden="true">
+            <g class="pa-gear g1"><circle cx="232" cy="52" r="22"/><circle cx="232" cy="52" r="8" class="pa-hole"/></g>
+            <g class="pa-gear g2"><circle cx="268" cy="86" r="15"/><circle cx="268" cy="86" r="5" class="pa-hole"/></g>
+            <path class="pa-car" d="M52 104 L64 76 Q70 66 82 66 L150 66 Q162 66 170 76 L186 96 L206 100 Q216 102 216 112 L216 118 L40 118 L40 112 Q40 106 52 104 Z"/>
+            <path class="pa-glass" d="M78 72 L104 72 L104 94 L68 94 Z M112 72 L148 72 Q156 72 162 80 L172 94 L112 94 Z"/>
+            <circle cx="78" cy="120" r="15" class="pa-wheel"/><circle cx="78" cy="120" r="6" class="pa-hub"/>
+            <circle cx="180" cy="120" r="15" class="pa-wheel"/><circle cx="180" cy="120" r="6" class="pa-hub"/>
+            <path class="pa-wrench" d="M262 118 l-28 -28 a10 10 0 1 1 6 -6 l28 28 z"/>
+          </svg>
+          <span class="status status-soon">● Coming soon</span>
+        </div>
+        <div class="project-body">
+          <span class="project-type">Team project (3 members) · Web development</span>
+          <h3>AutoConnection</h3>
+          <p>A web-based auto workshop management system that helps a car workshop organise its customers, vehicles and service work in one place. I'm designing the website with two teammates.</p>
+          <ul class="tech"><li>Web design</li><li>Web development</li><li>Teamwork</li></ul>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -436,6 +526,6 @@
 </footer>
 
 <button id="toTop" aria-label="Back to top">↑</button>
-<script src="js/script.js?v=12"></script>
+<script src="js/script.js?v=13"></script>
 </body>
 </html>

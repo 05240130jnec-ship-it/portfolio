@@ -440,6 +440,9 @@ Zodiac   : ♒ Aquarius`,
       'education.txt': `2024 - 2027  Computer System and Network  - Jigme Namgyel Engineering College
 2023         Class XII, BHSEC (Commerce)   - Desi High School        73.75%
 2020         Class X, BCSE                 - Phuntshothang MSS       69%`,
+      'projects.txt': `[In progress]  Linux Network Services Lab  - DNS, DHCP, FTP, web, SSH, syslog in GNS3
+[Live]         Personal Portfolio Website  - HTML, CSS, JavaScript (you're on it!)
+[Coming soon]  AutoConnection              - auto workshop management website (team of 3)`,
       'goals.txt': `Become a network professional who builds reliable, secure systems
 for organisations in Bhutan, and keep learning with a positive attitude.`,
       'contact.txt': `whatsapp : +975 17 31 94 36
@@ -689,7 +692,7 @@ Address: 192.0.2.${(name.length * 13) % 250 + 2}   <span class="t-dim">(simulate
     },
 
     goto(args) {
-      const map = { home: 'home', about: 'about', skills: 'skills', education: 'education', certificates: 'certificates', contact: 'contact' };
+      const map = { home: 'home', about: 'about', skills: 'skills', projects: 'projects', education: 'education', certificates: 'certificates', contact: 'contact' };
       const id = map[(args[0] || '').toLowerCase()];
       if (!id) return 'Usage: goto about | skills | education | certificates | contact';
       setTimeout(() => scrollToSection(id), 300);
